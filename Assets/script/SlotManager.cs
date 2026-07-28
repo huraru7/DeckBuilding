@@ -24,11 +24,12 @@ public class SlotManager : MonoBehaviour
     private void Start()
     {
         //ゲーム開始時、インベントリスロットにランダムなカードを配布する
-        foreach (var slot in inventorySlots)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
+            var slot = inventorySlots[i];
             var data = cardDataList[UnityEngine.Random.Range(0, cardDataList.Length)];
             var card = Instantiate(cardPrefab, slot.transform);
-            card.Setup(data);
+            card.Setup(data, i);
             (card.transform as RectTransform).anchoredPosition = Vector2.zero;
 
             slot.TrySetCard(card);
@@ -75,6 +76,11 @@ public class SlotManager : MonoBehaviour
     public void SortInventoryByHp()
     {
         SortInventory((a, b) => a.Data.hp.CompareTo(b.Data.hp));
+    }
+
+    public void SortInventoryById()
+    {
+        SortInventory((a, b) => a.Id.CompareTo(b.Id));
     }
 
     private void SortInventory(Comparison<Card> comparison)
