@@ -15,6 +15,7 @@ public class SlotManager : MonoBehaviour
     [SerializeField] private CardData[] cardDataList;
 
     [SerializeField] private TMP_Text deckCostText;
+    [SerializeField] private TMP_Text resultMessageText;
 
     private void Awake()
     {
@@ -44,12 +45,19 @@ public class SlotManager : MonoBehaviour
         }
 
         from.RemoveCard();
-        int deckCost = CountingDeckCost();
-
-        deckCostText.text = $"Cost: {deckCost}";
-        deckCostText.color = deckCost > MaxDeckCost ? Color.red : Color.black;
+        UpdateDeckCostDisplay();
 
         return true;
+    }
+
+    /// <summary>
+    /// デッキコストの表示テキストと警告色を更新する
+    /// </summary>
+    private void UpdateDeckCostDisplay()
+    {
+        int deckCost = CountingDeckCost();
+        deckCostText.text = $"Cost: {deckCost}";
+        deckCostText.color = deckCost > MaxDeckCost ? Color.red : Color.black;
     }
 
     /// <summary>
@@ -66,6 +74,15 @@ public class SlotManager : MonoBehaviour
             }
         }
         return totalCost;
+    }
+
+    /// <summary>
+    /// デッキを決定する。コストが規定値を超えている場合は警告メッセージを表示する
+    /// </summary>
+    public void ConfirmDeck()
+    {
+        int deckCost = CountingDeckCost();
+        resultMessageText.text = deckCost > MaxDeckCost ? "The cost is high" : "The deck has been applied";
     }
 
     public void SortInventoryByCost()

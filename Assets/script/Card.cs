@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class Card : MonoBehaviour
 {
+    [SerializeField] private TMP_Text costText;
+    [SerializeField] private TMP_Text hpText;
+
     private Image image;
 
     public CardData Data { get; private set; }
@@ -20,5 +24,7 @@ public class Card : MonoBehaviour
         Data = data;
         Id = id;
         image.sprite = data.cardImage;
+        costText.text = $"Cost: {data.cost}";
+        hpText.text = $"HP: {data.hp}";
     }
 }

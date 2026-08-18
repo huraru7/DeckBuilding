@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e21d7c4b0ad42475594f55bab6ffa94e, type: 3}
-  m_Name: CardData
+  m_Name: CardData 1
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  hp: 2
+  hp: 6
   cost: 11
   cardImage: {fileID: 0}
